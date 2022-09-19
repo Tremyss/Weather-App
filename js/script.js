@@ -1,7 +1,8 @@
 var root = document.querySelector("#root");
 var searchBar = document.querySelector("#searchbar");
 var cityName = ""
-var dropdown = document.querySelector('.dropdown')
+var dropdown = document.querySelector('.dropdown');
+var dropdownMatch = document.querySelector('.match');
 
 // todo 2 function, 1 fetch (nagy városlista), 1 other
 
@@ -16,10 +17,14 @@ const cityFinder = async () => {
             if (fetchCityContent.data[i].cities[j].startsWith(cityName)) {
                 var cityMatch = fetchCityContent.data[i].cities[j];
                 var countryMatch = fetchCityContent.data[i].country;
-                var content = `<div class="match"> ${cityMatch}, ${countryMatch} </div>`;
+
+                var createDiv = document.createElement("div");
+                createDiv.classList.add("match");
+                createDiv.innerHTML = `${cityMatch}, ${countryMatch}`;
+                dropdown.appendChild(createDiv);
                 console.log(cityMatch, countryMatch);
-                dropdown.style.display="flex";
-                dropdown.appendChild=content;
+                dropdown.style.display = "flex";
+                dropdown.style.flexDirection = "column"
                 console.log(fetchCityContent.data[i].cities[j], fetchCityContent.data[i].country);
             }            
         }
@@ -37,7 +42,7 @@ const cityFinder = async () => {
 // ? függvény, ami az input mező value-ját összehasonlítjuk minden ország minden városnevével
 
 const searchCity = () => {
-    console.clear();
+    dropdown.innerHTML = "";
     if (searchBar.value.length>=3) {
         console.log(".............ahoy.........");
         cityName = searchBar.value;
@@ -46,3 +51,10 @@ const searchCity = () => {
 }
 
 searchBar.addEventListener("input", searchCity);
+
+const teszt = (event) => {
+    console.log(event.target.value);
+}
+
+
+dropdownMatch.addEventListener("click", teszt);
