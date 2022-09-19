@@ -45,7 +45,7 @@ const searchCity = () => {
     dropdown.innerHTML = "";
     if (searchBar.value.length>=3) {
         console.log(".............ahoy.........");
-        cityName = searchBar.value;
+        cityName = searchBar.value.charAt(0).toUpperCase() + searchBar.value.slice(1, searchBar.value.length);
         cityFinder();
     }
 }
