@@ -1,6 +1,7 @@
 var root = document.querySelector("#root");
 var searchBar = document.querySelector("#searchbar");
 var cityName = ""
+var dropdown = document.querySelector('.dropdown')
 
 // todo 2 function, 1 fetch (nagy városlista), 1 other
 
@@ -13,6 +14,12 @@ const cityFinder = async () => {
     for (let i=0; i<fetchCityContent.data.length; i++) {
         for (let j=0; j<fetchCityContent.data[i].cities.length; j++) {
             if (fetchCityContent.data[i].cities[j].startsWith(cityName)) {
+                var cityMatch = fetchCityContent.data[i].cities[j];
+                var countryMatch = fetchCityContent.data[i].country;
+                var content = `<div class="match"> ${cityMatch}, ${countryMatch} </div>`;
+                console.log(cityMatch, countryMatch);
+                dropdown.style.display="flex";
+                dropdown.appendChild=content;
                 console.log(fetchCityContent.data[i].cities[j], fetchCityContent.data[i].country);
             }            
         }

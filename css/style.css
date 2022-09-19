@@ -24,10 +24,12 @@ html, body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .input-field {
   display: flex;
+  width: 100%;
   flex-direction: column;
   align-items: flex-start;
 }
@@ -38,6 +40,8 @@ html, body {
   font-size: 1.2rem;
   border-radius: 0.7rem;
   border: none;
+  text-transform: capitalize;
+  width: 100%;
 }
 
 #searchbar:focus {
@@ -49,4 +53,23 @@ html, body {
 #searchtitle {
   padding: 0.1rem;
   margin: 0.2rem;
+}
+
+.dropdown {
+  width: 100%;
+  background-color: aqua;
+  border: 0.1rem solid black;
+  position: absolute;
+  top: 5rem;
+}
+
+.match {
+  width: 100%;
+  padding: 0.1rem 0;
+  background-color: wheat;
+  border-bottom: 0.1rem solid #222222;
+}
+
+.match:hover {
+  cursor: pointer;
 }/*# sourceMappingURL=style.css.map */
