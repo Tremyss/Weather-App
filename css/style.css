@@ -63,6 +63,7 @@ html, body {
   width: 100%;
   background-color: aqua;
   border: 0.1rem solid black;
+  display: none;
   position: absolute;
   top: 5rem;
   overflow: scroll;
