@@ -5,11 +5,6 @@ var dropdown = document.querySelector('.dropdown');
 var dropdownMatch = document.querySelector('.match');
 var countryMatchUnderscored = ""
 var createDivValue = ""
-var createDiv = document.createElement("div");
-
-const cityNameFinder = (event) => {
-    console.log(createDiv.value)
-}
 
 // todo 2 function, 1 fetch (nagy városlista), 1 other
 
@@ -24,6 +19,7 @@ const cityFinder = async () => {
             if (fetchCityContent.data[i].cities[j].startsWith(cityName)) {
                 var cityMatch = fetchCityContent.data[i].cities[j];
                 var countryMatch = fetchCityContent.data[i].country;
+                var createDiv = document.createElement("div");
                 countryMatchUnderscored = countryMatch.replace(/ /g, "_")
                 
                 console.log(countryMatchUnderscored)
@@ -36,14 +32,16 @@ const cityFinder = async () => {
                 dropdown.style.display = "block";
                 // dropdown.style.flexDirection = "column"
                 // console.log(fetchCityContent.data[i].cities[j], fetchCityContent.data[i].country);
+                createDiv.addEventListener("click", () => {
+                    console.log(createDiv.textContent);
+                });
+                
+                
+
             }
         }
     }
 
-    createDiv.addEventListener("click", () => {
-        createDivValue = createDiv.value
-        cityNameFinder()
-    })
     
     /* console.log(fetchCityContent.data[0].cities[0]);
     // ez a fenti kód hozza elő az adott (i) ország adott (j) városát
