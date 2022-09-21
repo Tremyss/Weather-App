@@ -7,13 +7,44 @@ var countryMatchUnderscored = ""
 var createDivValue = ""
 var foundLocations = [];
 
+
 // todo 2 function, 1 fetch (nagy városlista), 1 other
+var fetchImage = async (selectedCity) => {
+    var imageResponse = await fetch (`https://api.pexels.com/v1/search?query=${selectedCity}`, {
+        headers: {'Authorization': '563492ad6f91700001000001db09f2c3ac4e4d88b42ba73ba3e0e687'}
+    })
+    var gottenImage = await imageResponse.json()
+    console.log(gottenImage);
+    var backgroundHolder = document.getElementById('backgroundHolder')
+    backgroundHolder.style.background = `url(${gottenImage.photos[0].src.landscape})`
+    backgroundHolder.style.backgroundPosition = 'center'
+    backgroundHolder.style.backgroundRepeat = 'no-repeat'
+    backgroundHolder.style.backgroundSize = 'cover'
+    
+}
+
+
+
 
 var showInfos = async (event) => {
+    var selectedCity = foundLocations[event.target.getAttribute("value")].city;
     var fetchWeather = await fetch(`https://api.weatherapi.com/v1/current.json?key=e6be19e096224376bf9100012221909&q=${foundLocations[event.target.getAttribute("value")].city}+${foundLocations[event.target.getAttribute("value")].country}`)
     var fetchWeatherContent = await fetchWeather.json();
     console.log(fetchWeatherContent);
     searchBar.value = foundLocations[event.target.getAttribute("value")].city + ", " + foundLocations[event.target.getAttribute("value")].country;
+    fetchImage(selectedCity)
+    var cardCity = document.getElementById('card-city')
+    var cardIcon = document.getElementById('card-icon')
+    var cardTemp = document.getElementById('card-temp')
+    var cardDate = document.getElementById('card-date')
+    cardCity.textContent = selectedCity;
+    console.log(`${fetchWeatherContent.current.condition.icon.slice(2,fetchWeatherContent.current.condition.length)}`);
+    var iconLink = `http://${fetchWeatherContent.current.condition.icon.slice(2,fetchWeatherContent.current.condition.length)}`
+    cardIcon.setAttribute('src', iconLink)
+
+    cardTemp.textContent = fetchWeatherContent.current.temp_c + '°C'
+    cardDate.textContent = `Last updated: ${fetchWeatherContent.current.last_updated}`
+     
 }
 
 
@@ -48,6 +79,7 @@ const divGenerator = async () => {
         divTemplate.setAttribute("value", i);
         divTemplate.innerHTML = `${foundLocations[i].city}, ${foundLocations[i].country}`;
         divTemplate.addEventListener("click", showInfos);
+        divTemplate.addEventListener("click", () => {dropdown.style.display = 'none'});
     dropdown.appendChild(divTemplate)
     }
 } 
@@ -60,6 +92,7 @@ const searchCity = () => {
     if (searchBar.value.length>=3) {
         dropdown.style.display = "flex";
         dropdown.style.flexDirection = "column";
+        dropdown.style.zIndex = 11
         cityName = searchBar.value.charAt(0).toUpperCase() + searchBar.value.slice(1, searchBar.value.length);
         cityFinder();
     } else {
@@ -88,6 +121,5 @@ const currentWeather = async () => {
 }
 
 currentWeather()
-
 
 

@@ -13,27 +13,75 @@ html, body {
   width: 100%;
 }
 
+body {
+  position: relative;
+}
+
+#card-container {
+  background-image: linear-gradient(rgba(39, 20, 161, 0.5450980392), rgba(59, 9, 83, 0.537254902));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 30rem;
+  height: 30rem;
+  gap: 2rem;
+  border-radius: 0.7rem;
+}
+
+#card-icon {
+  max-width: 20rem;
+  min-width: 15rem;
+  align-self: flex-start;
+  padding-left: 5rem;
+}
+
+#card-city {
+  font-size: 4rem;
+}
+
+#card-temp {
+  font-size: 4rem;
+}
+
 #root {
-  background-color: bisque;
+  background-color: rgba(128, 0, 128, 0.5);
+  color: white;
+  font-family: "Inter", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
+  height: 100vh;
+}
+
+#backgroundHolder {
+  width: 100%;
   height: 100%;
+  position: absolute;
+  opacity: 0.35;
 }
 
 .search-main {
-  width: 20rem;
+  width: 50%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   position: relative;
+  padding-top: 3rem;
+  z-index: 11;
+}
+
+#card-main {
+  width: 50%;
+  height: 100%;
+  padding-top: 4rem;
 }
 
 .input-field {
   display: flex;
-  width: 100%;
+  width: 50%;
   flex-direction: column;
   align-items: flex-start;
 }
@@ -60,24 +108,26 @@ html, body {
 }
 
 .dropdown {
-  width: 100%;
-  background-color: aqua;
-  border: 0.1rem solid black;
+  width: 50%;
   display: none;
   position: absolute;
-  top: 5rem;
+  top: 7.3rem;
   overflow: scroll;
   overflow-x: hidden;
   max-height: 20em;
+  z-index: 11;
+  border-radius: 0.7rem;
+  color: #222222;
 }
 
 .match {
   width: 100%;
-  padding: 0.1rem 0;
-  background-color: wheat;
-  border-bottom: 0.1rem solid #222222;
+  padding: 0.1rem 0.5rem;
+  background-color: rgba(255, 255, 255, 0.455);
 }
 
 .match:hover {
   cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.757);
+  color: #111111;
 }/*# sourceMappingURL=style.css.map */

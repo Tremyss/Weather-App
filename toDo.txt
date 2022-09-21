@@ -1,0 +1,4 @@
+search-ben space utan nem keres
+background-image alapertelmezett
+background-image olyan varosoknak, amire nincs (legyen az alapertelmezett)
+responsivitas
