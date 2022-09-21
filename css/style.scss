@@ -5,10 +5,12 @@
     user-select: none;
 }
 
-html, body {
+html,
+body {
     height: 100%;
     width: 100%;
 }
+
 body {
     background-color: rgba(128, 0, 128, 0.5);
     background-size: cover;
@@ -20,12 +22,12 @@ body {
 
 #card-container {
     background-image: linear-gradient(#2714a18b, #3b095389);
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    max-width: 30rem;
-    gap: 2rem;
+    min-width: 60%;
+    padding: 2rem 2rem;
     border-radius: 0.7rem;
     -webkit-border-radius: 0.7rem;
     -moz-border-radius: 0.7rem;
@@ -37,12 +39,12 @@ body {
     max-width: 20rem;
     min-width: 15rem;
     align-self: flex-start;
-    padding-left: 5rem;
+
 }
 
 #card-city {
     font-size: 4rem;
-    padding: 2rem;
+    padding: 0rem 2rem;
 }
 
 #card-temp {
@@ -70,13 +72,13 @@ body {
     width: 100%;
     height: 100%;
     position: absolute;
-    
-    
+
+
 }
 
-.search-main {    
+.search-main {
     width: 50%;
-    height: 100%;    
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -87,16 +89,20 @@ body {
 }
 
 #card-main {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
     width: 50%;
     height: 100%;
-    padding-top: 4rem;   
-    z-index: 11; 
+    padding-top: 4rem;
+    z-index: 11;
 }
 
 .input-field {
     display: flex;
     width: 50%;
-    flex-direction: column;    
+    flex-direction: column;
     align-items: flex-start;
 }
 
@@ -108,7 +114,7 @@ body {
     border: none;
     text-transform: capitalize;
     width: 100%;
-    
+
 }
 
 #searchbar:focus {
@@ -123,26 +129,27 @@ body {
 }
 
 .dropdown {
-    width:50%;
+    width: 50%;
     // border: 0.1rem solid black;
     display: none;
     position: absolute;
-    top:7.3rem;
+    top: 7.3rem;
     overflow: scroll;
     overflow-x: hidden;
     max-height: 20em;
     z-index: 11;
     border-radius: 0.7rem;
-    color:#222222
-    
+    color: #222222
 }
-.match{
+
+.match {
     width: 100%;
     padding: 0.1rem 0.5rem;
     background-color: rgba(255, 255, 255, 0.455);
     // border-bottom: 0.1rem solid #222222;
 }
-.match:hover{
+
+.match:hover {
     cursor: pointer;
     background-color: rgba(255, 255, 255, 0.757);
     color: #111111;

@@ -8,7 +8,8 @@
           user-select: none;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   width: 100%;
 }
@@ -23,12 +24,12 @@ body {
 
 #card-container {
   background-image: linear-gradient(rgba(39, 20, 161, 0.5450980392), rgba(59, 9, 83, 0.537254902));
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  max-width: 30rem;
-  gap: 2rem;
+  min-width: 60%;
+  padding: 2rem 2rem;
   border-radius: 0.7rem;
   -webkit-border-radius: 0.7rem;
   -moz-border-radius: 0.7rem;
@@ -40,12 +41,11 @@ body {
   max-width: 20rem;
   min-width: 15rem;
   align-self: flex-start;
-  padding-left: 5rem;
 }
 
 #card-city {
   font-size: 4rem;
-  padding: 2rem;
+  padding: 0rem 2rem;
 }
 
 #card-temp {
@@ -85,6 +85,10 @@ body {
 }
 
 #card-main {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
   width: 50%;
   height: 100%;
   padding-top: 4rem;

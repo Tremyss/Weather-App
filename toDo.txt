@@ -1,4 +1,7 @@
-search-ben space utan nem keres
-background-image alapertelmezett
-background-image olyan varosoknak, amire nincs (legyen az alapertelmezett)
-responsivitas
+- search-ben space utan nem keres -> Update: Hiba okozója a value-ban lévő karakter nagysága okozhatja. Ha pl New York-nál az Y-t külön odafigyelve caps-lockkal/shifttel írod úgy kiadja a találatot.
+
+- background-image alapertelmezett 
+
+- background-image olyan varosoknak, amire nincs (legyen az alapertelmezett) -> Kiegészítés: Ha az adott város nem kap vissza kép value-t akkor a capital city képét adhatnánk oda neki amit simán az országnév lekérdezéssel adna ki.
+
+- responsivitas -> Tablet, telefonos nézetre. Extrém felbontású almás kijelzőkre ha marad idő akkor max.
