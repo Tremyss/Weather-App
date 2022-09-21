@@ -15,11 +15,11 @@ var fetchImage = async (selectedCity) => {
     })
     var gottenImage = await imageResponse.json()
     console.log(gottenImage);
-    var backgroundHolder = document.getElementById('backgroundHolder')
-    backgroundHolder.style.background = `url(${gottenImage.photos[0].src.landscape})`
-    backgroundHolder.style.backgroundPosition = 'center'
-    backgroundHolder.style.backgroundRepeat = 'no-repeat'
-    backgroundHolder.style.backgroundSize = 'cover'
+    var body = document.querySelector('body');
+    body.style.background = `url(${gottenImage.photos[0].src.landscape})`
+    body.style.backgroundPosition = 'center'
+    body.style.backgroundRepeat = 'no-repeat'
+    body.style.backgroundSize = 'cover'
     
 }
 
