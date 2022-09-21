@@ -67,6 +67,7 @@ html, body {
   position: absolute;
   top: 5rem;
   overflow: scroll;
+  overflow-x: hidden;
   max-height: 20em;
 }
 

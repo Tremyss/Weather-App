@@ -18,29 +18,30 @@ var showInfos = async (event) => {
 
 
 const cityFinder = async () => {
-    // ? a cityname mindig a keresőmező értékével lesz egyenlő, majd + fg-ben karakterletésenként frissítsük az értékét, ez lehet keypress után
+   
     var fetchCity = await fetch ('https://countriesnow.space/api/v0.1/countries')
     var fetchCityContent = await fetchCity.json();
-    // console.log(fetchCityContent.data)
-    // ? 2 for loop, 1 a datán megy, 1 pedig az adott országhoz tartozó város i-edik tagján
+    foundLocations = [];
+    
+    
+    for (let i=0; i<fetchCityContent.data.length; i++) {
+        for (let j=0; j<fetchCityContent.data[i].cities.length; j++) {
+            if (fetchCityContent.data[i].cities[j].startsWith(cityName)) {
 
-        for (let i=0; i<fetchCityContent.data.length; i++) {
-            for (let j=0; j<fetchCityContent.data[i].cities.length; j++) {
-                if (fetchCityContent.data[i].cities[j].startsWith(cityName)) {
-    
-                    var cityMatch = fetchCityContent.data[i].cities[j];
-                    var countryMatch = fetchCityContent.data[i].country;
-                    foundLocations.push({city: `${cityMatch}`, country: `${countryMatch}` });
-    
-                }
+                var cityMatch = fetchCityContent.data[i].cities[j];
+                var countryMatch = fetchCityContent.data[i].country;
+                foundLocations.push({city: `${cityMatch}`, country: `${countryMatch}` });
+
             }
         }
-
-        return divGenerator();
+    }
+    console.log(foundLocations);
+    return divGenerator();
 }
 
 
 const divGenerator = async () => {
+    dropdown.innerHTML = "";
     for (let i = 0; i < foundLocations.length; i++) {
         var divTemplate = document.createElement("div");
         divTemplate.classList.add("match");
@@ -55,8 +56,7 @@ const divGenerator = async () => {
 
 const searchCity = () => {
     console.clear()
-    dropdown.innerHTML = "";
-    foundLocations = [];
+    
     if (searchBar.value.length>=3) {
         dropdown.style.display = "flex";
         dropdown.style.flexDirection = "column";
