@@ -7,3 +7,16 @@
 - responsivitas -> Tablet, telefonos nézetre. Extrém felbontású almás kijelzőkre ha marad idő akkor max.
 
 - DONE cityFinderben a cityName-et át kell alakítanunk úgy, hogy minden első karakter nagy legyen
+
+Script
+
+Tomi: Ált bemutató, Ricsi feldícsérése, kód
+
+Ági: Design, Wireframe, Figma, Blur
+
+Beni: Kereső funkció, csapatonként code review, 
+
+Csaba: Responzivitás, MediaQ
+
+Ricsi: JS
+

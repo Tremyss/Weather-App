@@ -24,13 +24,11 @@ var fetchImage = async (selectedCountry) => {
 }
 
 
-
-
 var showInfos = async (event) => {
     var selectedCity = foundLocations[event.target.getAttribute("value")].city;
     var selectedCountry = foundLocations[event.target.getAttribute("value")].country;
      
-    var fetchWeather = await fetch(`https://api.weatherapi.com/v1/current.json?key=e6be19e096224376bf9100012221909&q=${foundLocations[event.target.getAttribute("value")].city}+${foundLocations[event.target.getAttribute("value")].country}`)
+    var fetchWeather = await fetch(`https://api.weatherapi.com/v1/current.json?key=e6be19e096224376bf9100012221909&q=${foundLocations[event.target.getAttribute("value")].city}+${foundLocations[event.target.getAttribute("value")].country}&lang=hu`)
     var fetchWeatherContent = await fetchWeather.json();
     console.log(fetchWeatherContent);
     searchBar.value = foundLocations[event.target.getAttribute("value")].city + ", " + foundLocations[event.target.getAttribute("value")].country;
@@ -50,9 +48,6 @@ var showInfos = async (event) => {
     cardDate.textContent = `Last updated: ${fetchWeatherContent.current.last_updated}`;
 
     cardContainer.style.display = "flex";
-
-
-
 }
 
 
@@ -88,7 +83,6 @@ const cityFinder = async () => {
                 var cityMatch = fetchCityContent.data[i].cities[j];
                 var countryMatch = fetchCityContent.data[i].country;
                 foundLocations.push({ city: `${cityMatch}`, country: `${countryMatch}` });
-
             }
         }
     }
@@ -113,8 +107,6 @@ const divGenerator = async () => {
 // ? függvény, ami az input mező value-ját összehasonlítjuk minden ország minden városnevével
 
 const searchCity = () => {
-
-
     if (searchBar.value.length >= 3) {
         dropdown.style.display = "flex";
         dropdown.style.flexDirection = "column";
