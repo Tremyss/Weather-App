@@ -2,13 +2,20 @@ var root = document.querySelector("#root");
 var searchBar = document.querySelector("#searchbar");
 var cityName = ""
 var dropdown = document.querySelector('.dropdown');
-var dropdownMatch = document.querySelector('.match');
-var countryMatchUnderscored = ""
-var createDivValue = ""
 var foundLocations = [];
+var fetchCityContent = {}
 
+// fetch all city data
 
-// todo 2 function, 1 fetch (nagy városlista), 1 other
+const fetchAllCities = async () => {
+    var fetchCity = await fetch('https://countriesnow.space/api/v0.1/countries')
+    fetchCityContent = await fetchCity.json();
+    // console.log('fetchCityContent: ',fetchCityContent);
+}
+fetchAllCities()
+
+// fetch Pexel images and update body background
+
 var fetchImage = async (selectedCountry) => {
     var imageResponse = await fetch(`https://api.pexels.com/v1/search?query=${selectedCountry}`, {
         headers: { 'Authorization': '563492ad6f91700001000001db09f2c3ac4e4d88b42ba73ba3e0e687' }
@@ -23,6 +30,7 @@ var fetchImage = async (selectedCountry) => {
 
 }
 
+// fetch weather data and update cardContainer w details
 
 var showInfos = async (event) => {
     var selectedCity = foundLocations[event.target.getAttribute("value")].city;
@@ -51,7 +59,9 @@ var showInfos = async (event) => {
 }
 
 
-const cityFinder = async () => {
+// find locations for dropdown from fetched (all cities) data using input from searchBar
+
+const cityFinder = () => {
     if (cityName.includes(' ')){
         var tempArr =[]
         for (var i=0; i<cityName.length; i++){
@@ -68,13 +78,7 @@ const cityFinder = async () => {
         }
         console.log('cityName: ', cityName);
     }
-    
-
-    var fetchCity = await fetch('https://countriesnow.space/api/v0.1/countries')
-    var fetchCityContent = await fetchCity.json();
-    // console.log('fetchCityContent: ',fetchCityContent);
     foundLocations = [];
-
 
     for (let i = 0; i < fetchCityContent.data.length; i++) {
         for (let j = 0; j < fetchCityContent.data[i].cities.length; j++) {
@@ -90,6 +94,7 @@ const cityFinder = async () => {
     return divGenerator();
 }
 
+// create dropdown list based on cityFinder results
 
 const divGenerator = async () => {
     dropdown.innerHTML = "";
@@ -104,7 +109,7 @@ const divGenerator = async () => {
     }
 }
 
-// ? függvény, ami az input mező value-ját összehasonlítjuk minden ország minden városnevével
+// check searchBar input (3+ chars) and pass it towards cityFinder
 
 const searchCity = () => {
     if (searchBar.value.length >= 3) {
@@ -120,19 +125,20 @@ const searchCity = () => {
 
 searchBar.addEventListener("input", searchCity);
 
-searchBar.addEventListener("keypress", (event) => {
-    if (event.key == "Enter") {
-        showInfos();
-    } else if (event.keycode == "Space") {
 
-        for (let i = 0; i < searchBar.value.length; i++) {
-            if (i == ' ') {
-                searchBar.value.charAt(i + 1).toUpperCase();
-                // console.log("sajt");
-            }
-        }
-    }
-});
+// searchBar.addEventListener("keypress", (event) => {
+//     if (event.key == "Enter") {
+//         showInfos();
+//     } else if (event.keycode == "Space") {
+
+//         for (let i = 0; i < searchBar.value.length; i++) {
+//             if (i == ' ') {
+//                 searchBar.value.charAt(i + 1).toUpperCase();
+//                 // console.log("sajt");
+//             }
+//         }
+//     }
+// });
 
 
 
