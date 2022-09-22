@@ -5,3 +5,5 @@
 - background-image olyan varosoknak, amire nincs (legyen az alapertelmezett) -> Kiegészítés: Ha az adott város nem kap vissza kép value-t akkor a capital city képét adhatnánk oda neki amit simán az országnév lekérdezéssel adna ki.
 
 - responsivitas -> Tablet, telefonos nézetre. Extrém felbontású almás kijelzőkre ha marad idő akkor max.
+
+- cityFinderben a cityName-et át kell alakítanunk úgy, hogy minden első karakter nagy legyen
