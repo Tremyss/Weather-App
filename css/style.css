@@ -16,13 +16,11 @@ body {
 
 body {
   background-color: rgba(128, 0, 128, 0.5);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   position: relative;
 }
 
 #card-container {
+  word-break: break-word;
   background-image: linear-gradient(rgba(39, 20, 161, 0.5450980392), rgba(59, 9, 83, 0.537254902));
   display: none;
   flex-direction: column;
@@ -37,9 +35,15 @@ body {
   -o-border-radius: 0.7rem;
 }
 
+#card-icon_holder {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 #card-icon {
   max-width: 20rem;
-  min-width: 15rem;
+  min-width: 7rem;
   align-self: flex-start;
 }
 
@@ -68,9 +72,15 @@ body {
 }
 
 #backgroundHolder {
+  background: url(https://images.pexels.com/photos/76969/cold-front-warm-front-hurricane-felix-76969.jpeg);
+  opacity: 0.5;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   width: 100%;
   height: 100%;
   position: absolute;
+  filter: blur(2px);
 }
 
 .search-main {
@@ -130,7 +140,7 @@ body {
   top: 7.3rem;
   overflow: scroll;
   overflow-x: hidden;
-  max-height: 20em;
+  max-height: 20rem;
   z-index: 11;
   border-radius: 0.7rem;
   color: #222222;
@@ -146,4 +156,19 @@ body {
   cursor: pointer;
   background-color: rgba(255, 255, 255, 0.757);
   color: #111111;
+}
+
+@media screen and (max-width: 600px) {
+  html {
+    font-size: 10px;
+  }
+  #root {
+    flex-direction: column;
+  }
+  .search-main {
+    width: 100%;
+  }
+  .dropdown {
+    top: 10rem;
+  }
 }/*# sourceMappingURL=style.css.map */

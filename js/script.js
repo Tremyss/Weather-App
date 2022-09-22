@@ -9,13 +9,13 @@ var foundLocations = [];
 
 
 // todo 2 function, 1 fetch (nagy városlista), 1 other
-var fetchImage = async (selectedCity) => {
-    var imageResponse = await fetch(`https://api.pexels.com/v1/search?query=${selectedCity}`, {
+var fetchImage = async (selectedCountry) => {
+    var imageResponse = await fetch(`https://api.pexels.com/v1/search?query=${selectedCountry}`, {
         headers: { 'Authorization': '563492ad6f91700001000001db09f2c3ac4e4d88b42ba73ba3e0e687' }
     })
     var gottenImage = await imageResponse.json()
-    console.log(gottenImage);
-    var body = document.querySelector('body');
+    
+    var body = document.querySelector('#backgroundHolder');
     body.style.background = `url(${gottenImage.photos[0].src.landscape})`
     body.style.backgroundPosition = 'center'
     body.style.backgroundRepeat = 'no-repeat'
@@ -28,21 +28,24 @@ var fetchImage = async (selectedCity) => {
 
 var showInfos = async (event) => {
     var selectedCity = foundLocations[event.target.getAttribute("value")].city;
+    var selectedCountry = foundLocations[event.target.getAttribute("value")].country;
+     
     var fetchWeather = await fetch(`https://api.weatherapi.com/v1/current.json?key=e6be19e096224376bf9100012221909&q=${foundLocations[event.target.getAttribute("value")].city}+${foundLocations[event.target.getAttribute("value")].country}`)
     var fetchWeatherContent = await fetchWeather.json();
     console.log(fetchWeatherContent);
     searchBar.value = foundLocations[event.target.getAttribute("value")].city + ", " + foundLocations[event.target.getAttribute("value")].country;
-    fetchImage(selectedCity)
+    fetchImage(selectedCountry)
     var cardContainer = document.querySelector('#card-container');
     var cardCity = document.getElementById('card-city')
     var cardIcon = document.getElementById('card-icon')
+    var cardIconText = document.getElementById('card-icon-text')
     var cardTemp = document.getElementById('card-temp')
     var cardDate = document.getElementById('card-date')
     cardCity.textContent = selectedCity;
-    console.log(`${fetchWeatherContent.current.condition.icon.slice(2, fetchWeatherContent.current.condition.length)}`);
+    // console.log(`${fetchWeatherContent.current.condition.icon.slice(2, fetchWeatherContent.current.condition.length)}`);
     var iconLink = `http://${fetchWeatherContent.current.condition.icon.slice(2, fetchWeatherContent.current.condition.length)}`
     cardIcon.setAttribute('src', iconLink)
-
+    cardIconText.textContent = fetchWeatherContent.current.condition.text
     cardTemp.textContent = fetchWeatherContent.current.temp_c + '°C';
     cardDate.textContent = `Last updated: ${fetchWeatherContent.current.last_updated}`;
 
@@ -54,9 +57,27 @@ var showInfos = async (event) => {
 
 
 const cityFinder = async () => {
+    if (cityName.includes(' ')){
+        var tempArr =[]
+        for (var i=0; i<cityName.length; i++){
+            tempArr.push(cityName[i])
+        }
+        for (var i=0; i<tempArr.length; i++){
+            if (tempArr[i]=== ' '){
+                tempArr[i+1] = tempArr[i+1].toUpperCase()
+            }
+        }
+        cityName = ''
+        for (var i=0; i< tempArr.length; i++){
+            cityName += tempArr[i]
+        }
+        console.log('cityName: ', cityName);
+    }
+    
 
     var fetchCity = await fetch('https://countriesnow.space/api/v0.1/countries')
     var fetchCityContent = await fetchCity.json();
+    // console.log('fetchCityContent: ',fetchCityContent);
     foundLocations = [];
 
 
@@ -71,7 +92,7 @@ const cityFinder = async () => {
             }
         }
     }
-    console.log(foundLocations);
+    // console.log(foundLocations);
     return divGenerator();
 }
 
@@ -109,30 +130,17 @@ searchBar.addEventListener("input", searchCity);
 
 searchBar.addEventListener("keypress", (event) => {
     if (event.key == "Enter") {
-        console.log("anyád");
         showInfos();
     } else if (event.keycode == "Space") {
 
         for (let i = 0; i < searchBar.value.length; i++) {
             if (i == ' ') {
                 searchBar.value.charAt(i + 1).toUpperCase();
-                console.log("sajt");
+                // console.log("sajt");
             }
         }
     }
 });
 
-
-
-
-// Weather API
-
-const currentWeather = async () => {
-    const fetchWeather = await fetch(`https://api.weatherapi.com/v1/current.json?key=af7dd8b769394e619f6134652222009&q=${cityName}+${countryMatchUnderscored}`)
-    const weatherJSON = await fetchWeather.json()
-    console.log(weatherJSON)
-}
-
-currentWeather()
 
 
